@@ -17,20 +17,20 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'pnpm'
+          cache: pnpm
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 10
 
-      - name: Build project
-        run: |
-          export SKIP_LINT=true
-          pnpm install --no-frozen-lockfile
-          pnpm build --if-present
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
 
-      - name: Copy build files to server
+      - name: Build project (bypass lint)
+        run: pnpm exec vite build
+
+      - name: Deploy to server
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.HOST }}

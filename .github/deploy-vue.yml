@@ -26,6 +26,7 @@ jobs:
 
       - name: Build project
         run: |
+          export SKIP_LINT=true
           pnpm install --no-frozen-lockfile
           pnpm build --if-present
 

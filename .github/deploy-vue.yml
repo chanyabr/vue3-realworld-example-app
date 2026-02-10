@@ -1,4 +1,4 @@
-name: deploy value
+name: deploy vue
 
 on:
   push:
@@ -13,21 +13,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 8
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: pnpm
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10
-
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
-      - name: Build project (bypass lint)
+      - name: Build project
         run: pnpm exec vite build
 
       - name: Deploy to server

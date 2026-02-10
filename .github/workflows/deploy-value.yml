@@ -1,9 +1,9 @@
-name: deploy value
+name: deploy value (prod)
 
 on:
   push:
     branches:
-      - main
+      - prod
   workflow_dispatch:
 
 jobs:
